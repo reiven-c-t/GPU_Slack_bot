@@ -9,8 +9,9 @@ class GPUManager:
 
     def confirm_current_gpu_state(self):
         free_gpus = py3nvml.get_free_gpus()
+        used_gpus = [not state for state in free_gpus]
         state = GPULog()
-        state.save_state_list(free_gpus)
+        state.save_state_list(used_gpus)
         self.latest_state = state
 
     def _save_state(self):
@@ -28,11 +29,11 @@ class GPUManager:
                 else:
                     stop_ids.append(str(idx))
             else:
-                last_state = MESSAGE_RUN if last_state[idx] else MESSAGE_STOP
-                current_state = MESSAGE_RUN if current_gpu_state else MESSAGE_STOP
+                last_state_message = MESSAGE_RUN if last_state[idx] else MESSAGE_STOP
+                current_state_message = MESSAGE_RUN if current_gpu_state else MESSAGE_STOP
                 change_message.append(MESSAGE_CHANGE_TEMPLATE.format(gpu_id=idx,
-                                                                     last_state=last_state,
-                                                                     current_state=current_state))
+                                                                     last_state=last_state_message,
+                                                                     current_state=current_state_message))
         run_ids = ", ".join(run_ids)
         stop_ids = ", ".join(stop_ids)
         change_message = "".join(change_message)
@@ -45,9 +46,6 @@ class GPUManager:
         message = ""
         last_state = GPULog.latest_state()
         self.confirm_current_gpu_state()
-        print("latest",self.latest_state)
-        print("last", last_state)
-        print()
         if self.latest_state != last_state:
             self._save_state()
             message = self.generate_message(last_state)
