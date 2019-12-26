@@ -3,6 +3,11 @@ from DataManager import GPULog, session
 from config.const import MESSAGE_RUN, MESSAGE_STOP, MESSAGE_CHANGE_TEMPLATE, MESSAGE_TEMPLATE
 from datetime import datetime
 
+def now():
+    DIFF_JST_FROM_UTC = 9
+    now = datetime.datetime.utcnow() + datetime.timedelta(hours=DIFF_JST_FROM_UTC)
+    return str(now)
+
 class GPUManager:
     def __init__(self):
         self.latest_state = None
@@ -37,7 +42,7 @@ class GPUManager:
         stop_ids = ", ".join(stop_ids)
         change_message = "".join(change_message)
         message = MESSAGE_TEMPLATE.format(
-            time=str(datetime.utcnow()),
+            time=str(now()),
             run_gpu_ids=run_ids,
             stop_gpu_ids=stop_ids,
             change_message=change_message)
