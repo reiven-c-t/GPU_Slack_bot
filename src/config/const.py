@@ -16,7 +16,7 @@ MESSAGE_TEMPLATE = """
 ###
 
 """
-MESSAGE_CHANGE_TEMPLATE = "\t- gpu {gpu_id}: {last_state} -> {current_state}\n"
+MESSAGE_CHANGE_TEMPLATE = "\t- gpu {gpu_id}: {last_state} -> {current_state} ({diff})\n"
 
 OAUTH_TOKEN = os.environ["OAUTH_TOKEN"]
 BOT_OAUTH_TOKEN = os.environ["BOT_OAUTH_TOKEN"]  # unused yet
