@@ -61,7 +61,7 @@ class GPULog(Base):
 
     @staticmethod
     def latest_state():
-        return session.query().order_by(desc(GPULog.created_at)).first()
+        return session.query(GPULog).order_by(desc(GPULog.created_at)).first()
 
 
 
