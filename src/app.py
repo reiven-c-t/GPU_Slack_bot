@@ -2,13 +2,11 @@ from GPUManager import GPUManager
 from SlackAPICaller import send_message
 import schedule
 from time import sleep
-from datetime import datetime
 
 manager = GPUManager()
 
 
 def app():
-    print(str(datetime.utcnow()))
     message = manager.main()
     if message != "":
         send_message(message)
