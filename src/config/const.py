@@ -6,10 +6,15 @@ load_dotenv(ENV_PATH)
 MESSAGE_RUN = "RUN"
 MESSAGE_STOP = "STOP"
 MESSAGE_CHANGE = "CHANGE"
-MESSAGE_TEMPLATE = """- RUN: ({run_gpu_ids})
+MESSAGE_TEMPLATE = """
+
+### {time}
+- RUN: ({run_gpu_ids})
 - STOP: ({stop_gpu_ids})
 - CHANGE
 {change_message}
+###
+
 """
 MESSAGE_CHANGE_TEMPLATE = "\t- gpu {gpu_id}: {last_state} -> {current_state}\n"
 
