@@ -37,7 +37,7 @@ class GPUManager:
             if last_state[idx] != current_gpu_state:
                 last_state_message = MESSAGE_RUN if last_state[idx] else MESSAGE_STOP
                 current_state_message = MESSAGE_RUN if current_gpu_state else MESSAGE_STOP
-                diff = str(current_gpu_state.created_at - last_state[idx].created_at)
+                diff = str(self.latest_state.created_at - last_state[idx].created_at)
                 change_message.append(MESSAGE_CHANGE_TEMPLATE.format(gpu_id=idx,
                                                                      last_state=last_state_message,
                                                                      current_state=current_state_message,
