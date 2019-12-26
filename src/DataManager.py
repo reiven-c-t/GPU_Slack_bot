@@ -38,13 +38,27 @@ class GPULog(Base):
     gpu_7 = Column("gpu_7", Boolean, nullable=False, comment="GPU7's state. True if used.")
     created_at = Column(DateTime, nullable=False, default=datetime.utcnow)
 
-    state_list = [gpu_0, gpu_1, gpu_2, gpu_3, gpu_4, gpu_5, gpu_6, gpu_7]
+
+    @property
+    def state_list(self):
+        return [
+            self.gpu_1,
+            self.gpu_2,
+            self.gpu_3,
+            self.gpu_4,
+            self.gpu_5,
+            self.gpu_6,
+            self.gpu_7,
+        ]
 
     def __getitem__(self, item: int):
         return self.state_list[item]
 
     def __str__(self):
-        return "(%d, %d, %d, %d, %d, %d, %d, %d)" % (self.gpu_0, self.gpu_1, self.gpu_2, self.gpu_3, self.gpu_4, self.gpu_5, self.gpu_6, self.gpu_7)
+        if self.gpu_0 is None:
+            return ""
+        else:
+            return "(%d, %d, %d, %d, %d, %d, %d, %d)" % (self.gpu_0, self.gpu_1, self.gpu_2, self.gpu_3, self.gpu_4, self.gpu_5, self.gpu_6, self.gpu_7)
 
     def __eq__(self, other):
         for i, j in zip(self.state_list, other.state_list):
@@ -56,8 +70,14 @@ class GPULog(Base):
         return not self.__eq__(other)
 
     def save_state_list(self, state_list):
-        for idx, gpu in enumerate(self.state_list):
-            self.state_list[idx] = state_list[idx]
+        self.gpu_0 = state_list[0]
+        self.gpu_1 = state_list[1]
+        self.gpu_2 = state_list[2]
+        self.gpu_3 = state_list[3]
+        self.gpu_4 = state_list[4]
+        self.gpu_5 = state_list[5]
+        self.gpu_6 = state_list[6]
+        self.gpu_7 = state_list[7]
 
     @staticmethod
     def latest_state():
