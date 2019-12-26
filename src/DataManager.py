@@ -42,6 +42,7 @@ class GPULog(Base):
     @property
     def state_list(self):
         return [
+            self.gpu_0,
             self.gpu_1,
             self.gpu_2,
             self.gpu_3,
