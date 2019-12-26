@@ -1,7 +1,7 @@
 import py3nvml
 from DataManager import GPULog, session
 from config.const import MESSAGE_RUN, MESSAGE_STOP, MESSAGE_CHANGE_TEMPLATE, MESSAGE_TEMPLATE
-from datetime import datetime
+import datetime
 
 def now():
     DIFF_JST_FROM_UTC = 9
