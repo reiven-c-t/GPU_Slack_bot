@@ -23,12 +23,11 @@ class GPUManager:
         run_ids = []
         stop_ids = []
         for idx, current_gpu_state in enumerate(self.latest_state.state_list):
-            if last_state[idx] == current_gpu_state:
-                if current_gpu_state:
-                    run_ids.append(str(idx))
-                else:
-                    stop_ids.append(str(idx))
+            if current_gpu_state:
+                run_ids.append(str(idx))
             else:
+                stop_ids.append(str(idx))
+            if last_state[idx] != current_gpu_state:
                 last_state_message = MESSAGE_RUN if last_state[idx] else MESSAGE_STOP
                 current_state_message = MESSAGE_RUN if current_gpu_state else MESSAGE_STOP
                 change_message.append(MESSAGE_CHANGE_TEMPLATE.format(gpu_id=idx,
