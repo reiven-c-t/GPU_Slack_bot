@@ -1,7 +1,7 @@
 import py3nvml
 from DataManager import GPULog, session
 from config.const import MESSAGE_RUN, MESSAGE_STOP, MESSAGE_CHANGE_TEMPLATE, MESSAGE_TEMPLATE
-
+from datetime import datetime
 
 class GPUManager:
     def __init__(self):
@@ -46,6 +46,7 @@ class GPUManager:
         last_state = GPULog.latest_state()
         self.confirm_current_gpu_state()
         if self.latest_state != last_state:
+            print(str(datetime.utcnow()), "changed")
             self._save_state()
             message = self.generate_message(last_state)
         return message
