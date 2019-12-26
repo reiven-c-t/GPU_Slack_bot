@@ -45,6 +45,7 @@ class GPUManager:
         message = ""
         last_state = GPULog.latest_state()
         self.confirm_current_gpu_state()
+        print(self.latest_state, last_state)
         if self.latest_state != last_state:
             print(str(datetime.utcnow()), "changed")
             self._save_state()
