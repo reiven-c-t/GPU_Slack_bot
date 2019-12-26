@@ -43,6 +43,9 @@ class GPULog(Base):
     def __getitem__(self, item: int):
         return self.state_list[item]
 
+    def __str__(self):
+        return "(%d, %d, %d, %d, %d, %d, %d, %d)" % (self.gpu_0, self.gpu_1, self.gpu_2, self.gpu_3, self.gpu_4, self.gpu_5, self.gpu_6, self.gpu_7)
+
     def __eq__(self, other):
         for i, j in zip(self.state_list, other.state_list):
             if i != j:
@@ -58,16 +61,20 @@ class GPULog(Base):
 
     @staticmethod
     def latest_state():
-        return session.query(GPULog.gpu0,
-                             GPULog.gpu1,
-                             GPULog.gpu2,
-                             GPULog.gpu3,
-                             GPULog.gpu4,
-                             GPULog.gpu5,
-                             GPULog.gpu6,
-                             GPULog.gpu7).order_by(desc(GPULog.created_at)).first()
+        return session.query().order_by(desc(GPULog.created_at)).first()
 
 
 
 if __name__ == '__main__':
     Base.metadata.create_all(bind=ENGINE)
+    log = GPULog()
+    log.gpu_0 = False
+    log.gpu_1 = False
+    log.gpu_2 = False
+    log.gpu_3 = False
+    log.gpu_4 = False
+    log.gpu_5 = False
+    log.gpu_6 = False
+    log.gpu_7 = False
+    session.add(log)
+    session.commit()
