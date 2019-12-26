@@ -61,10 +61,14 @@ class GPULog(Base):
             return "(%d, %d, %d, %d, %d, %d, %d, %d)" % (self.gpu_0, self.gpu_1, self.gpu_2, self.gpu_3, self.gpu_4, self.gpu_5, self.gpu_6, self.gpu_7)
 
     def __eq__(self, other):
-        for i, j in zip(self.state_list, other.state_list):
-            if i != j:
-                return False
-            return True
+        return self.gpu_0 == other.gpu_0 and \
+               self.gpu_1 == other.gpu_1 and \
+               self.gpu_2 == other.gpu_2 and \
+               self.gpu_3 == other.gpu_3 and \
+               self.gpu_4 == other.gpu_4 and \
+               self.gpu_5 == other.gpu_5 and \
+               self.gpu_6 == other.gpu_6 and \
+               self.gpu_7 == other.gpu_7
 
     def __ne__(self, other):
         return not self.__eq__(other)
