@@ -7,7 +7,7 @@ MESSAGE_RUN = "RUN"
 MESSAGE_STOP = "STOP"
 MESSAGE_CHANGE = "CHANGE"
 MESSAGE_TEMPLATE = """- RUN: ({run_gpu_ids})
-- STOP: {stop_gpu_ids})
+- STOP: ({stop_gpu_ids})
 - CHANGE
 {change_message}
 """
